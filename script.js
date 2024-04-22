@@ -1,6 +1,5 @@
-// We create a class for the stack
 class Stack {
-  // The stack has three properties, the first node, the last node and the stack size
+  // The stack has two properties, the items in the stack and the stack size
   constructor() {
     this.items = [];
     this.size = 0;
@@ -18,7 +17,7 @@ class Stack {
     this.size--;
     return this.items.pop();
   }
-
+  // The remove method eliminated the element at the "bottom" of the stack and returns its value
   remove() {
     if (this.items.length == 0) {
       return "Underflow";
@@ -26,18 +25,19 @@ class Stack {
     this.size--;
     return this.items.shift();
   }
+  // Returns the element at the "top" of the stack
   getTop() {
     return this.items[this.items.length - 1];
   }
-
+  // Returns the element at the "bottom" of the stack
   getBottom() {
     return this.items[0];
   }
-
+  // Returns the size of the stack
   size() {
     return this.size;
   }
-
+  // Returns true if the stack is currently empty
   isEmpty() {
     return this.size === 0;
   }
@@ -85,8 +85,7 @@ function operate(operator, a, b) {
 let numbers = [];
 let operator = null;
 
-// TO DO: Figure out how to make it so that, after an error, it will work if the next value is a number
-// but will continue to give an error if the following sequence is an operator followed by anumber.
+// getInput() processes each button click on the calculator
 function getInput() {
   const stack = new Stack();
   let a = null;
@@ -97,7 +96,6 @@ function getInput() {
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
       let type = button.className;
-
       const input = { value: button.textContent, type: type };
 
       // Conditions if the selected button is for a number
@@ -106,13 +104,13 @@ function getInput() {
         // Case 1: No previous button selected
         if (stack.isEmpty()) {
           stack.push(input);
-        } else if (
+        }
+        // Case 2: A number is entered immediately after an error (permitted)
+        else if (
           numbers &&
           numbers[0] === "Error" &&
           stack.getTop().value === "="
         ) {
-          console.log("YES");
-          console.log(stack.getTop().type);
           while (stack.size !== 0) {
             stack.pop();
           }
@@ -133,12 +131,10 @@ function getInput() {
         console.log("An operator was selected", input);
         // Case 1: No previous button selected
         if (stack.isEmpty()) {
-          console.log("Empty stack");
           numbers.push(0);
         }
         // Case 2: Previous button was for a number
         else if (stack.getTop().type == "number") {
-          console.log("Number type after an operator");
           // Concatenate all the digits on the stack
           let number = "";
           while (stack.size !== 0) {
@@ -150,24 +146,15 @@ function getInput() {
         }
         // Case 3: Previous button was for an operator
         else if (stack.getTop().type == "operator") {
-          console.log("Operator type after an operator");
           // Remove the previous operators; want only the current selection
-
           while (stack.size !== 0) {
             stack.pop();
           }
-
           stack.push(input);
         }
 
         // If two complete numbers have been entered, attempt to perform the requested operation
         if (numbers.length == 2) {
-          console.log(
-            "Two numbers entered: ",
-            numbers,
-            " and one operator: ",
-            operator
-          );
           if (numbers[0] == "Error" || numbers[1] == "Error") {
             numbers = ["Error"];
           } else {
@@ -175,7 +162,6 @@ function getInput() {
             let b = parseFloat(numbers[1]);
 
             let result = operate(operator, a, b);
-            console.log("RESULT: ", result);
             numbers = [result];
           }
         }
