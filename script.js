@@ -164,6 +164,8 @@ function getInput() {
             let result = operate(operator, a, b);
             numbers = [result];
           }
+          // Display the result in div id="display"
+          document.getElementById("display").textContent = numbers[0];
         }
       }
       console.log("Stack size: ", stack.size);
