@@ -1,4 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  font-family: "Montserrat", sans-serif;
+}
+.calculator-wrapper {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  height: 100%;
+}
+#calculator {
+  width: 22rem;
+  border: 3px solid black;
+  border-radius: 20px;
+  box-shadow: 5px 5px 0 0 #6638bf;
+}
 #buttons {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+  padding: 1.5rem 1rem;
+  background-color: #e4fcef;
+  border-radius: 0 0 20px 20px;
+}
+
+#display {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-content: flex-end;
+  height: 14rem;
+  border-bottom: 3px solid black;
+  padding: 2rem 1rem;
+  font-size: 2.8rem;
+  font-weight: 500;
+  background-color: #e4fcef;
+  border-radius: 20px 20px 0 0;
+}
+.number,
+.operator {
+  font-size: 1.5rem;
+  font-weight: 500;
+  border: 2px solid black;
+  border-radius: 5%;
+  cursor: pointer;
+  height: 4rem;
+  border-radius: 20px;
+  color: white;
+  background-color: #958bff;
+  box-shadow: 3px 3px 0 0 #6638bf;
+}
+.number {
+}
+.operator {
+}
+#clear {
+  grid-column: -2/-1;
+  grid-row: 1/2;
+}
+
+#seven {
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+
+#eight {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+#nine {
+  grid-row: 2/3;
+  grid-column: 3/4;
+}
+#divide {
+  grid-row: 2/3;
+  grid-column: 4/5;
+}
+#four {
+  grid-row: 3/4;
+  grid-column: 1/2;
+}
+#five {
+  grid-row: 3/4;
+  grid-column: 2/3;
+}
+#six {
+  grid-row: 3/4;
+  grid-column: 3/4;
+}
+#multiply {
+  grid-row: 3/4;
+  grid-column: 4/5;
+}
+#one {
+  grid-row: 4/5;
+  grid-column: 1/2;
+}
+#two {
+  grid-row: 4/5;
+  grid-column: 2/3;
+}
+#three {
+  grid-row: 4/5;
+  grid-column: 3/4;
+}
+#subtract {
+  grid-row: 4/5;
+  grid-column: 4/5;
+}
+#zero {
+  grid-column: 1/2;
+  grid-row: 5/6;
+}
+#equals {
+  grid-row: 5/6;
+  grid-column: 2/4;
+}
+#add {
+  grid-row: 5/6;
+  grid-column: 4/5;
 }
