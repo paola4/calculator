@@ -88,8 +88,7 @@ let operator = null;
 // getInput() processes each button click on the calculator
 function getInput() {
   const stack = new Stack();
-  let a = null;
-  let b = null;
+  let current_number = "";
 
   const buttons = document.querySelectorAll("button");
 
@@ -97,10 +96,20 @@ function getInput() {
     button.addEventListener("click", () => {
       let type = button.className;
       const input = { value: button.textContent, type: type };
-
+      // Condition if the selected button is for the clear button
+      if (type == "clear") {
+        console.log("Clear button was selected");
+        while (stack.size !== 0) {
+          stack.pop();
+        }
+        numbers = [];
+        operator = null;
+        document.getElementById("display").textContent = 0;
+      }
       // Conditions if the selected button is for a number
       if (type == "number") {
         console.log("A number was selected", input);
+
         // Case 1: No previous button selected
         if (stack.isEmpty()) {
           stack.push(input);
@@ -125,6 +134,8 @@ function getInput() {
         } else {
           stack.push(input);
         }
+        current_number += input.value;
+        document.getElementById("display").textContent = current_number;
       }
       // Conditions if the selected button is for an operator
       else if (type == "operator") {
@@ -141,6 +152,7 @@ function getInput() {
             number += stack.remove().value;
           }
           numbers.push(number);
+          current_number = "";
           // Push the new operator on the stack
           stack.push(input);
         }
@@ -164,7 +176,7 @@ function getInput() {
             let result = operate(operator, a, b);
             numbers = [result];
           }
-          // Display the result in div id="display"
+          // Display the result
           document.getElementById("display").textContent = numbers[0];
         }
       }
